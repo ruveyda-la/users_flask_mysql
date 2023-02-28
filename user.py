@@ -14,7 +14,8 @@ class User:
     # Now we use class methods to query our database
     @classmethod
     def save(cls,data):
-        query = """INSERT INTO users (first_name, last_name, email) VALUES (%(first_name)s,%(last_name)s,%(email)s);"""
+        query = """INSERT INTO users (first_name, last_name, email)
+                VALUES (%(first_name)s,%(last_name)s,%(email)s);"""
         result=connectToMySQL(cls.db).query_db(query,data)
         return result
     @classmethod
@@ -28,4 +29,26 @@ class User:
         for result in results:
             users.append( cls(result) )
         return users
+
+    @classmethod
+    def get_one(cls,data):
+        query = "SELECT * FROM users WHERE id= %(id)s;"
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result[0]
+
+    @classmethod
+    def change(cls,data):
+        query="""UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s,
+                email=%(email)s
+                WHERE id=%(id)s;"""
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+
+    @classmethod
+    def delete_user(cls,data):
+        query="DELETE FROM users WHERE id=%(id)s;"
+        result=connectToMySQL(cls.db).query_db(query,data)
+        return result
+
+
 
