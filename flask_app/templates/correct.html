@@ -10,11 +10,11 @@
 <body>
     <div class="main" style="width:800px; margin:0 auto; margin-top: 50px;">
         <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">Edit User {{user.id}}</span>
+            <span class="navbar-brand mb-0 h1">Add a New User</span>
             <a href="/">Home</a>
         </nav>
 
-        <form action="/users/update" method="post">
+        <form action="/add/new" method="post">
             <div class="form-group">
 
                 {% with messages = get_flashed_messages() %}     
@@ -25,23 +25,22 @@
                     {% endif %}
                 {% endwith %}
     
-                <input type="hidden" name="id"class="form-control" value="{{user.id}}" >
+                <input type="hidden" name="id"class="form-control" value="{{session.id}}" >
             </div>
             <div class="form-group">
                 <label for="first_name">First Name:</label>
-                <input type="text" name="first_name"class="form-control"  value="{{user.first_name}}" >
+                <input type="text" name="first_name"class="form-control"  value="{{session.first_name}}" >
             </div>
             <div class="form-group">
                 <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" class="form-control"  value="{{user.last_name}}">
+                <input type="text" name="last_name" class="form-control"  value="{{session.last_name}}">
             </div>
             <div class="form-group">
                 <label for="email">Email address:</label>
-                <input type="text" name="email" class="form-control" value="{{user.email}}">
+                <input type="text" name="email" class="form-control" value="{{session.email}}">
             </div>
             <div style="margin-top:20px; display:flex; gap:10px;align-items:center;">
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="/users/{{user.id}}">Show User</a>
+            <button type="submit" class="btn btn-primary">Add User</button>
             </div>
         </form>
 
